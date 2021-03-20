@@ -1,0 +1,50 @@
+<section>
+  <mat-toolbar color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Weather Query App</span>
+    <span class="flex-width"></span>
+    <button mat-icon-button>
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</section>
+
+<section>
+  <div class="single-line-field">
+    <mat-form-field>
+      <mat-label>City, Location</mat-label>
+      <input name="query" matInput placeholder="Lima, Perú" #query>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="fetchWeather(query.value); query.value = ''">Get Weather</button>
+  </div>
+</section>
+
+<main class="main-wrapper">
+  <app-weather-result-card *ngIf="currentWeatherResult"
+                           [currentWeatherResult]="currentWeatherResult"
+                           (onSaveCity)="saveCity($event.name, $event.city)">
+  </app-weather-result-card>
+</main>
+
+<section class="main-wrapper">
+  <h2>Past queries</h2>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let data of historicalData" (click)="fetchWeather(data, false)">
+      {{ data }}
+    </mat-list-option>
+  </mat-selection-list>
+</section>
+
+<section class="main-wrapper">
+  <h2>Saved data</h2>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let data of savedData" (click)="fetchWeather(data.city, false)">
+      {{ data.name }}
+    </mat-list-option>
+  </mat-selection-list>
+</section>

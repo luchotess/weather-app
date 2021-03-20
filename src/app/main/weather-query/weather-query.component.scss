@@ -1,0 +1,23 @@
+.flex-width {
+  flex: 1 1 auto;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.single-line-field {
+  padding: 2rem;
+  display: flex;
+  width: 100%;
+
+  mat-form-field {
+    margin-right: 2rem;
+  }
+}
+
+.main-wrapper {
+  padding: 2rem;
+}

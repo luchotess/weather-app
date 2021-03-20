@@ -1,0 +1,26 @@
+<mat-card class="weather-result-card" (mouseleave)="showName=false" *ngIf="currentWeatherResult.location && currentWeatherResult.current">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image" [style.backgroundImage]="'url(' + currentWeatherResult.current.weather_icons[0] + ')'"></div>
+    <mat-card-title>{{ currentWeatherResult.location.name }} - {{ currentWeatherResult.location.country }}</mat-card-title>
+    <mat-card-subtitle>
+      <span><strong>{{ currentWeatherResult.current.temperature }}º C</strong></span> |
+      <span *ngFor="let description of currentWeatherResult.current.weather_descriptions">
+          {{ description }}
+        </span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Zipcode: </strong>{{ currentWeatherResult.location.zipcode }}</p>
+    <p><strong>City: </strong>{{ currentWeatherResult.location.name }}</p>
+    <p><strong>State/providence: </strong>{{ currentWeatherResult.location.region }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-form-field class="hidden" [class.active]="showName">
+      <mat-label>Name</mat-label>
+      <input name="name" matInput placeholder="Location name" #name>
+    </mat-form-field>
+    <button mat-button (mouseover)="showName = true" (click)="saveCity(currentWeatherResult.location.name, name.value)">
+      SAVE
+    </button>
+  </mat-card-actions>
+</mat-card>
